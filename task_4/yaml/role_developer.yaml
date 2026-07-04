@@ -1,0 +1,18 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: demo
+  name: developer
+rules:
+# Поды: только читать, чтобы делать kubectl logs / kubectl describe
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch"]
+# Деплойменты: видеть статус, ревизию, условия готовности
+- apiGroups: [""]
+  resources: ["deployments"]
+  verbs: ["get", "list", "watch"]
+# Сервисы и Ingress: видеть, куда идёт трафик
+- apiGroups: [""]
+  resources: ["services", "ingresses"]
+  verbs: ["get", "list", "watch"]
